@@ -1,6 +1,9 @@
 {
     "name": "jimphle/data-structure",
+    "type": "library",
     "description": "Jimdo PHP library extraction of data-structure component",
+    "keywords": ["data-structure", "map", "vector"],
+    "homepage": "https://github.com/Jimdo/jimphle-data-structure",
     "require": {
         "php": ">=5.3.0"
     },
