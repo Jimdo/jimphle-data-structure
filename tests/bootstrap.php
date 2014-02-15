@@ -12,5 +12,4 @@ if (!file_exists($autoload)) {
     exit(1);
 }
 
-$loader = require $autoload;
-$loader->add('Jimphle\\DataStructure\\Test', __DIR__);
+require $autoload;
