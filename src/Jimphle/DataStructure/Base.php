@@ -134,4 +134,13 @@ abstract class Base implements BaseInterface
     {
         return $this->data;
     }
+
+    /**
+     * @param \Closure $closure
+     * @return BaseInterface
+     */
+    public function map(\Closure $closure)
+    {
+        return new static(array_map($closure, $this->getPayload()));
+    }
 }
