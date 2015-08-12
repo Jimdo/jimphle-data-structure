@@ -53,4 +53,22 @@ class Map extends Base
         $payloadValue = get_object_vars($object);
         return static::fromArray($payloadValue);
     }
+
+    /**
+     * set a value in a nested map
+     * @param array $keys
+     * @param mixed $value
+     * @return Map
+     */
+    public function setIn($keys, $value)
+    {
+        $lastKey = array_shift($keys);
+        if (count($keys) > 0 && !isset($this->$lastKey->$keys[0])) {
+            throw new \RuntimeException(sprintf("Key '%s->%s' does not exist.", $lastKey, $keys[0]));
+        }
+        if ($this->$lastKey instanceof Map) {
+            return $this->merge(new self(array($lastKey => $this->$lastKey->setIn($keys, $value))));
+        }
+        return $this->merge(new self(array($lastKey => $value)));
+    }
 }

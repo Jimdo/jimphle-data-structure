@@ -233,4 +233,48 @@ class MapTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Jimphle\DataStructure\Vector', $payload->foo);
         $this->assertEquals($expected, $payload->foo[0]['bar']);
     }
+
+    /**
+     * @test
+     */
+    public function setInShouldReturnTheSameMapWhenThereIsNotNesting()
+    {
+        /**
+         * @var Map $payload
+         */
+        $payload = Map::fromArray(array('foo' => 'baz'));
+        $payload = $payload->setIn(array('foo'), 'boo');
+        $this->assertThat($payload->foo, $this->equalTo('boo'));
+    }
+
+    /**
+     * @test
+     */
+    public function setInShouldSetAValueInANestedMap()
+    {
+        /**
+         * @var Map $payload
+         */
+        $payload = Map::fromArray(array('foo' => array('bar' => 'baz', 'boot' => array('spam' => 'eggs'))));
+
+        $payload = $payload->setIn(array('foo', 'bar'), 'boo');
+        $this->assertThat($payload->foo->bar, $this->equalTo('boo'));
+
+        $payload = $payload->setIn(array('foo', 'boot', 'spam'), 'ham');
+        $this->assertThat($payload->foo->boot->spam, $this->equalTo('ham'));
+    }
+
+    /**
+     * @test
+     * @expectedException \RuntimeException
+     */
+    public function setInShouldFailWhenKeyDoesNotExist()
+    {
+        /**
+         * @var Map $payload
+         */
+        $payload = Map::fromArray(array('foo' => 'bar'));
+
+        var_dump($payload->setIn(array('foo', 'bar'), 'boo'));
+    }
 }
