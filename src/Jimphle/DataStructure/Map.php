@@ -55,6 +55,17 @@ class Map extends Base
     }
 
     /**
+     * set a value in a map
+     * @param string $key
+     * @param mixed $value
+     * @return Map
+     */
+    public function set($key, $value)
+    {
+        return $this->setIn(array($key), $value);
+    }
+
+    /**
      * set a value in a nested map
      * @param array $keys
      * @param mixed $value
@@ -66,7 +77,7 @@ class Map extends Base
         if (count($keys) > 0 && !isset($this->$lastKey->$keys[0])) {
             throw new \RuntimeException(sprintf("Key '%s->%s' does not exist.", $lastKey, $keys[0]));
         }
-        if ($this->$lastKey instanceof Map) {
+        if (count($keys) > 0 && $this->$lastKey instanceof Map) {
             return $this->merge(new self(array($lastKey => $this->$lastKey->setIn($keys, $value))));
         }
         return $this->merge(new self(array($lastKey => $value)));

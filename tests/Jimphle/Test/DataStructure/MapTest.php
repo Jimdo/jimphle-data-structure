@@ -237,7 +237,21 @@ class MapTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function setInShouldReturnTheSameMapWhenThereIsNotNesting()
+    public function setShouldSetAValueInAMap()
+    {
+        /**
+         * @var Map $payload
+         */
+        $payload = Map::fromArray(array('foo' => 'bar'));
+
+        $payload = $payload->set('foo', 'boo');
+        $this->assertThat($payload->foo, $this->equalTo('boo'));
+    }
+
+    /**
+     * @test
+     */
+    public function setInShouldReturnTheSameMapWhenThereIsNoNesting()
     {
         /**
          * @var Map $payload
@@ -262,6 +276,10 @@ class MapTest extends \PHPUnit_Framework_TestCase
 
         $payload = $payload->setIn(array('foo', 'boot', 'spam'), 'ham');
         $this->assertThat($payload->foo->boot->spam, $this->equalTo('ham'));
+
+        $payload = new Map(array('foo' => new Map()));
+        $payload = $payload->setIn(array('foo'), 'boo');
+        $this->assertThat($payload->foo, $this->equalTo('boo'));
     }
 
     /**
