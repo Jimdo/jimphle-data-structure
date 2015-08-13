@@ -143,4 +143,13 @@ abstract class Base implements BaseInterface
     {
         return new static(array_map($closure, $this->getPayload()));
     }
+
+    /**
+     * @param \Closure $closure
+     * @return BaseInterface
+     */
+    public function filter(\Closure $closure)
+    {
+        return new static(array_filter($this->getPayload(), $closure));
+    }
 }
