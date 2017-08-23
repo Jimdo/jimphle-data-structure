@@ -74,7 +74,7 @@ class Map extends Base
     public function setIn($keys, $value)
     {
         $lastKey = array_shift($keys);
-        if (count($keys) > 0 && !isset($this->$lastKey->$keys[0])) {
+        if (count($keys) > 0 && !isset($this->$lastKey->{$keys[0]})) {
             throw new \RuntimeException(sprintf("Key '%s->%s' does not exist.", $lastKey, $keys[0]));
         }
         if (count($keys) > 0 && $this->$lastKey instanceof Map) {

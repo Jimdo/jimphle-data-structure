@@ -1,9 +1,11 @@
 <?php
+
 namespace Jimphle\Test\DataStructure;
 
+use PHPUnit_Framework_TestCase;
 use Jimphle\DataStructure\Map;
 
-class MapTest extends \PHPUnit_Framework_TestCase
+class MapTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -24,9 +26,9 @@ class MapTest extends \PHPUnit_Framework_TestCase
     public function toArrayShouldWorkRecursively()
     {
         $value = array('foo' => new Map(array('bar' => 'baz')));
-                $payload = new Map(
-                    $value
-                );
+        $payload = new Map(
+            $value
+        );
 
         $this->assertEquals(array('foo' => array('bar' => 'baz')), $payload->toArray());
     }

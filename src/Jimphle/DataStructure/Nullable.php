@@ -1,7 +1,7 @@
 <?php
 namespace Jimphle\DataStructure;
 
-class Null extends Base
+class Nullable extends Base
 {
     public function __construct()
     {

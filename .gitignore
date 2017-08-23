@@ -1,3 +1,4 @@
 /vendor/
+.idea
 jimphle-data-structure.iml
 composer.lock
