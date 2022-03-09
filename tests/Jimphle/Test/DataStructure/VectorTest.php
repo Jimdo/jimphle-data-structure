@@ -1,26 +1,28 @@
 <?php
 namespace Jimphle\Test\DataStructure;
 
+use Jimphle\DataStructure\InvalidPropertyException;
 use Jimphle\DataStructure\Vector;
+use PHPUnit\Framework\TestCase;
 
-class VectorTest extends \PHPUnit_Framework_TestCase
+class VectorTest extends TestCase
 {
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function itShouldThrowAnExceptionIfGetOffsetIsNotInt()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $payload = new Vector(array("foo"));
         $payload->offsetGet("huhu");
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function itShouldThrowAnExceptionIfIssetOffsetIsNotInt()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $payload = new Vector(array("foo"));
         $payload->offsetExists("huhu");
     }
@@ -108,10 +110,10 @@ class VectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Jimphle\DataStructure\InvalidPropertyException
      */
     public function itShouldThrowAnExceptionIfPropertyDoesNotExist()
     {
+        $this->expectException(InvalidPropertyException::class);
         $value = array('foo', 'bar');
         $payload = new Vector(
             $value
