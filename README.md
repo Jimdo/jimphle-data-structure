@@ -1,8 +1,5 @@
 # Jimphle-data-structure
 
-[![Build Status](https://travis-ci.org/Jimdo/jimphle-data-structure.png?branch=master)](https://travis-ci.org/Jimdo/jimphle-data-structure)
-
-
 Jimdo PHP library extraction of data-structure component.
 
 This comes with a Map and a Vector and a Null implementation of the BaseInterface.
