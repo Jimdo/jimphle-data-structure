@@ -2,10 +2,11 @@
 
 namespace Jimphle\Test\DataStructure;
 
-use PHPUnit_Framework_TestCase;
+use Jimphle\DataStructure\InvalidPropertyException;
+use PHPUnit\Framework\TestCase;
 use Jimphle\DataStructure\Map;
 
-class MapTest extends PHPUnit_Framework_TestCase
+class MapTest extends TestCase
 {
     /**
      * @test
@@ -106,10 +107,10 @@ class MapTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Jimphle\DataStructure\InvalidPropertyException
      */
     public function itShouldThrowAnExceptionIfPropertyDoesNotExist()
     {
+        $this->expectException(InvalidPropertyException::class);
         $value = array('foo' => 'bar');
         $payload = new Map(
             $value
@@ -286,10 +287,10 @@ class MapTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \RuntimeException
      */
     public function setInShouldFailWhenKeyDoesNotExist()
     {
+        $this->expectException(\RuntimeException::class);
         /**
          * @var Map $payload
          */
